@@ -16,12 +16,12 @@ class Data{
 	float  Balance;
 	String name;
 	int pin;
+	int transactions = 0;
+	String transactionHistory = "";
+	
 }
 
 class Atm_opn{
-	
-	int transactions = 0;
-	String transactionHistory = "";
 	
 	Scanner sc = new Scanner(System.in);
 
@@ -50,6 +50,7 @@ class Atm_opn{
 			}
 		else
 			{
+			
 			System.out.println("Account Does not exist");
 			System.out.println("-------------------------------------------------------------------------------------------\n\n");
 			System.out.println("Kindly, create Bank Account first\n");
@@ -151,8 +152,8 @@ class Atm_opn{
 			obj.Balance = obj.Balance +a;
 			System.out.println("Amount deposited succesfully");
 			String str = a + " Rs deposited\n";
-			transactionHistory = transactionHistory.concat(str);
-			transactions++;
+			obj.transactionHistory = obj.transactionHistory.concat(str);
+			obj.transactions++;
 			Menu(obj);
 			}
 			catch ( Exception e) {
@@ -171,8 +172,8 @@ class Atm_opn{
 				obj.Balance = obj.Balance -w;
 				System.out.println("Amount withdrawn succesfully");
 				String str = w + " Rs Withdrawn\n";
-				transactionHistory = transactionHistory.concat(str);
-				transactions++;
+				obj.transactionHistory = obj.transactionHistory.concat(str);
+				obj.transactions++;
 			}
 			else
 			{
@@ -225,9 +226,9 @@ class Atm_opn{
 
 				obj.Balance = obj.Balance +trans;
 				System.out.println("Amount transfer succesfully to "+ obj.name);
-				transactions++;
+				obj.transactions++;
 				String str = trans + " Rs transfered to " + obj.name +"\n";
-				transactionHistory = transactionHistory.concat(str);
+				obj.transactionHistory = obj.transactionHistory.concat(str);
 				
 				Menu(obj);
 			}
@@ -250,9 +251,9 @@ class Atm_opn{
 				
 				obj.Balance = obj.Balance +trans;
 				System.out.println("Amount transfer succesfully");
-				transactions++;
+				obj.transactions++;
 				String str = trans + " Rs transfered to " + obj.name +"\n";
-				transactionHistory = transactionHistory.concat(str);
+				obj.transactionHistory = obj.transactionHistory.concat(str);
 				Menu(obj);
 			}
 			}
@@ -261,12 +262,14 @@ class Atm_opn{
 		}
 			
 		public void transHistory(Data obj) {
-			if ( transactions == 0 ) {
-				System.out.println("\nEmpty");
-			}
-			else {
-				System.out.println("\n" + transactionHistory);
+			if ( obj.transactions == 0 ) {
+				System.out.println("\n You had no transations.");
 				Menu(obj);
 			}
-		}	
+			else {
+				System.out.println("\n" + obj.transactionHistory);
+				Menu(obj);
+			}
+		}
+		
 }
